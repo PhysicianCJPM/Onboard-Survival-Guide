@@ -26,9 +26,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 2rem;          /* space between image and text */
     padding: 0 1.5rem;
     position: relative;
+    flex-wrap: wrap;    /* allow wrapping if screen is very narrow */
 }
 
 /* Text */
@@ -43,9 +44,9 @@ body {
     opacity: 0.85;
 }
 
-/* Character styling (behind text) */
+/* Character styling (beside text) */
 .character {
-    width: 220px;
+    width: 320px;
     transform: rotate(-8deg);
     position: relative;
     z-index: 1;
@@ -69,16 +70,16 @@ body {
     100% { transform: rotate(-8deg); }
 }
 
-/* Responsive: stack vertically on mobile */
+/* Mobile adjustments */
 @media (max-width: 768px) {
     .hero-container {
-        flex-direction: column;
+        flex-direction: row;  /* stay side-by-side */
         justify-content: center;
         text-align: center;
     }
 
     .hero-text h1 {
-        font-size: 2.8rem;
+        font-size: 2.6rem;
     }
 
     .hero-text p {
@@ -86,8 +87,7 @@ body {
     }
 
     .character {
-        width: 180px;
+        width: 240px;  /* slightly bigger on mobile */
         transform: rotate(-6deg);
-        margin-bottom: 1rem;
     }
 }
