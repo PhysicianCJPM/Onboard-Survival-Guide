@@ -26,10 +26,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;          /* space between image and text */
-    padding: 0 1.5rem;
+    gap: 1rem;           /* decreased gap between image & text */
+    padding: 0 0.5rem;   /* decreased horizontal padding */
     position: relative;
-    flex-wrap: wrap;    /* allow wrapping if screen is very narrow */
+    flex-wrap: wrap;     /* allow wrapping if very small screen */
 }
 
 /* Text */
@@ -39,25 +39,41 @@ body {
 }
 
 .hero-text p {
-    margin-top: 1rem;
+    margin-top: 0.5rem; /* slightly closer */
     font-size: 1.25rem;
     opacity: 0.85;
 }
 
 /* Character styling (beside text) */
-/* Character styling (beside text) */
 .character {
-    width: 260px;           /* increased from 220px */
+    width: 280px;          /* slightly bigger */
     transform: rotate(-8deg);
     position: relative;
     z-index: 1;
     animation: wave 2.5s ease-in-out infinite;
 }
 
+/* Bring text above character */
+.hero-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Wave animation */
+@keyframes wave {
+    0%   { transform: rotate(-8deg); }
+    25%  { transform: rotate(-5deg); }
+    50%  { transform: rotate(-8deg); }
+    75%  { transform: rotate(-11deg); }
+    100% { transform: rotate(-8deg); }
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .hero-container {
-        flex-direction: row;  /* stay side-by-side */
+        flex-direction: row;  /* stay side-by-side on mobile */
         justify-content: center;
         text-align: center;
     }
@@ -71,7 +87,7 @@ body {
     }
 
     .character {
-        width: 280px;       /* bigger on mobile */
+        width: 300px;        /* bigger for mobile */
         transform: rotate(-6deg);
     }
 }
