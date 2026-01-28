@@ -25,11 +25,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;           /* less gap between image & text */
-    padding: 0 0.5rem;   /* reduced horizontal padding */
+    gap: 1rem;              /* image-text spacing */
+    padding: 0 0.5rem;      /* reduce horizontal padding */
+    flex-wrap: wrap;         /* allows text/image to wrap on very small screens */
 }
 
 /* Text */
+.hero-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;          /* prevent text from overflowing */
+}
+
 .hero-text h1 {
     font-size: 4rem;
     font-weight: 800;
@@ -39,23 +48,24 @@ body {
     margin-top: 0.5rem;
     font-size: 1.25rem;
     opacity: 0.85;
+    word-wrap: break-word;
 }
 
 /* Character wrapper (for click animations) */
 .character-wrapper {
     display: inline-block;
-    perspective: 1000px;  /* needed for 3D twirl */
+    perspective: 1000px;    /* for 3D twirl */
 }
 
-/* Character image itself: wave + tilt */
+/* Character image: tilt + wave */
 .character {
-    width: 280px;          /* desktop default */
-    transform: rotate(-8deg);  /* tilt */
+    width: 280px;             /* desktop size */
+    transform: rotate(-8deg); /* tilt */
     animation: wave 2.5s ease-in-out infinite;
     display: block;
 }
 
-/* Wave keyframes */
+/* Wave animation */
 @keyframes wave {
     0%   { transform: rotate(-8deg); }
     25%  { transform: rotate(-5deg); }
@@ -64,13 +74,13 @@ body {
     100% { transform: rotate(-8deg); }
 }
 
-/* Twirl animation (on wrapper) */
+/* Twirl animation around Y-axis (applied to wrapper) */
 @keyframes twirl {
     from { transform: rotateY(0deg); }
     to   { transform: rotateY(360deg); }
 }
 
-/* Bounce animation (on wrapper) */
+/* Bounce animation (applied to wrapper) */
 @keyframes bounce {
     0%   { transform: translateY(0); }
     25%  { transform: translateY(-20px); }
@@ -88,28 +98,34 @@ body {
     animation: bounce 0.6s ease forwards;
 }
 
-/* Responsive tweaks */
+/* Responsive tweaks for mobile */
 @media (max-width: 768px) {
     .hero-container {
-        flex-direction: row; /* keep side-by-side */
+        flex-direction: row;  /* side-by-side */
         justify-content: center;
         text-align: center;
     }
 
+    .hero-text {
+        max-width: 55%;       /* shrink text width on mobile */
+    }
+
     .hero-text h1 {
-        font-size: 2.6rem;
+        font-size: 2.2rem;    /* smaller heading */
+        word-wrap: break-word;
     }
 
     .hero-text p {
-        font-size: 1.1rem;
+        font-size: 1rem;      /* smaller paragraph */
+        word-wrap: break-word;
     }
 
     .character {
-        width: 300px;          /* bigger on mobile */
-        transform: rotate(-6deg); /* preserve tilt */
+        width: 250px;          /* smaller image for small screens */
+        transform: rotate(-6deg); /* maintain tilt */
     }
 
-    /* Wave keyframes mobile */
+    /* Wave animation adjusted for mobile tilt */
     @keyframes wave {
         0%   { transform: rotate(-6deg); }
         25%  { transform: rotate(-3deg); }
@@ -118,7 +134,7 @@ body {
         100% { transform: rotate(-6deg); }
     }
 
-    /* Twirl & bounce keyframes mobile */
+    /* Twirl & bounce keyframes remain the same */
     @keyframes twirl {
         from { transform: rotateY(0deg); }
         to   { transform: rotateY(360deg); }
