@@ -1,0 +1,75 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #f7f7f2; /* off-white */
+    color: #1f2937;
+}
+
+/* Hero section */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    background-color: #f7f7f2; /* off-white */
+}
+
+.hero-text {
+    position: relative;
+    z-index: 2;
+    padding: 0 1.5rem;
+}
+
+.hero-text h1 {
+    font-size: 4rem;
+    font-weight: 800;
+}
+
+.hero-text p {
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    opacity: 0.85;
+}
+
+/* Character behind text, slightly above H1, tilted left */
+.character {
+    position: absolute;
+    bottom: 50%;      /* push it up */
+    left: 25%;        /* center horizontally */
+    transform: translate(-50%, 50%) rotate(-8deg);
+    width: 260px;
+    z-index: 1;       /* behind text */
+    opacity: 0.95;
+    animation: wave 2.5s ease-in-out infinite;
+}
+
+/* Waving animation */
+@keyframes wave {
+    0%   { transform: translate(-50%, 50%) rotate(-8deg) rotate(0deg); }
+    25%  { transform: translate(-50%, 50%) rotate(-8deg) rotate(3deg); }
+    50%  { transform: translate(-50%, 50%) rotate(-8deg) rotate(0deg); }
+    75%  { transform: translate(-50%, 50%) rotate(-8deg) rotate(-3deg); }
+    100% { transform: translate(-50%, 50%) rotate(-8deg) rotate(0deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2.8rem;
+    }
+
+    .character {
+        width: 200px;
+        transform: translate(-50%, 50%) rotate(-6deg);
+    }
+}
+
