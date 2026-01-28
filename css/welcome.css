@@ -59,7 +59,7 @@ body {
 
 /* Character image: tilt + wave */
 .character {
-    width: 280px;             /* desktop size */
+    width: 120px;             /* desktop size */
     transform: rotate(-8deg); /* tilt */
     animation: wave 2.5s ease-in-out infinite;
     display: block;
