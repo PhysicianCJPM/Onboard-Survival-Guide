@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+/* Body & background */
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-color: #f7f7f2; /* off-white */
@@ -13,22 +14,24 @@ body {
 
 /* Hero section */
 .hero {
-    position: relative;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: left;
     overflow: hidden;
-    text-align: center;
-    background-color: #f7f7f2; /* off-white */
 }
 
-.hero-text {
-    position: relative;
-    z-index: 2;
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
     padding: 0 1.5rem;
+    position: relative;
 }
 
+/* Text */
 .hero-text h1 {
     font-size: 4rem;
     font-weight: 800;
@@ -40,36 +43,51 @@ body {
     opacity: 0.85;
 }
 
-/* Character behind text, slightly above H1, tilted left */
+/* Character styling (behind text) */
 .character {
-    position: absolute;
-    bottom: 50%;      /* push it up */
-    left: 25%;        /* center horizontally */
-    transform: translate(-50%, 50%) rotate(-8deg);
-    width: 260px;
-    z-index: 1;       /* behind text */
-    opacity: 0.95;
+    width: 220px;
+    transform: rotate(-8deg);
+    position: relative;
+    z-index: 1;
     animation: wave 2.5s ease-in-out infinite;
 }
 
-/* Waving animation */
-@keyframes wave {
-    0%   { transform: translate(-50%, 50%) rotate(-8deg) rotate(0deg); }
-    25%  { transform: translate(-50%, 50%) rotate(-8deg) rotate(3deg); }
-    50%  { transform: translate(-50%, 50%) rotate(-8deg) rotate(0deg); }
-    75%  { transform: translate(-50%, 50%) rotate(-8deg) rotate(-3deg); }
-    100% { transform: translate(-50%, 50%) rotate(-8deg) rotate(0deg); }
+/* Bring text above character */
+.hero-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Responsive */
+/* Wave animation */
+@keyframes wave {
+    0%   { transform: rotate(-8deg); }
+    25%  { transform: rotate(-5deg); }
+    50%  { transform: rotate(-8deg); }
+    75%  { transform: rotate(-11deg); }
+    100% { transform: rotate(-8deg); }
+}
+
+/* Responsive: stack vertically on mobile */
 @media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
     .hero-text h1 {
         font-size: 2.8rem;
     }
 
+    .hero-text p {
+        font-size: 1.1rem;
+    }
+
     .character {
-        width: 200px;
-        transform: translate(-50%, 50%) rotate(-6deg);
+        width: 180px;
+        transform: rotate(-6deg);
+        margin-bottom: 1rem;
     }
 }
-
