@@ -1,6 +1,19 @@
-// Placeholder for future interactions
-// Example: smooth scroll, session logic, animations
-
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Welcome page loaded');
+    const character = document.querySelector('.character');
+
+    character.addEventListener('click', () => {
+        // Start twirl
+        character.classList.add('twirl');
+
+        // After twirl ends, remove twirl & add bounce
+        character.addEventListener('animationend', () => {
+            character.classList.remove('twirl');
+            character.classList.add('bounce');
+
+            // Remove bounce after it ends so it can repeat on next click
+            character.addEventListener('animationend', () => {
+                character.classList.remove('bounce');
+            }, { once: true });
+        }, { once: true });
+    });
 });
