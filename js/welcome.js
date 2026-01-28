@@ -2,13 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.querySelector('.character-wrapper');
 
     wrapper.addEventListener('click', () => {
-        // Remove classes if present (reset animation)
-        wrapper.classList.remove('twirl', 'bounce');
+        // Remove the class if it exists
+        wrapper.classList.remove('twirl-bounce');
 
-        // Trigger reflow to allow re-animation
+        // Force reflow so the animation can restart
         void wrapper.offsetWidth;
 
-        // Add classes again to run animation once
-        wrapper.classList.add('twirl', 'bounce');
+        // Add the class to trigger twirl + bounce
+        wrapper.classList.add('twirl-bounce');
     });
 });
