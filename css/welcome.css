@@ -18,7 +18,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: left;
     overflow: hidden;
 }
 
@@ -26,10 +25,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;           /* decreased gap between image & text */
-    padding: 0 0.5rem;   /* decreased horizontal padding */
-    position: relative;
-    flex-wrap: wrap;     /* allow wrapping if very small screen */
+    gap: 1rem;           /* less gap between image & text */
+    padding: 0 0.5rem;   /* reduced horizontal padding */
 }
 
 /* Text */
@@ -39,98 +36,26 @@ body {
 }
 
 .hero-text p {
-    margin-top: 0.5rem; /* slightly closer */
+    margin-top: 0.5rem;
     font-size: 1.25rem;
     opacity: 0.85;
 }
 
-/* Character styling (beside text) */
+/* Character wrapper (for click animations) */
+.character-wrapper {
+    display: inline-block;
+    perspective: 1000px;  /* needed for 3D twirl */
+}
+
+/* Character image itself: wave + tilt */
 .character {
-    width: 280px;          /* slightly bigger */
-    transform: rotate(-8deg);
-    position: relative;
-    z-index: 1;
-    animation: wave 2.5s ease-in-out infinite;
-}
-
-/* Bring text above character */
-.hero-text {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-}
-
-
-/* Enable 3D perspective */
-.hero-container {
-    perspective: 1000px;  /* important for rotateY to look 3D */
-}
-
-/* Twirl animation around Y-axis while keeping tilt */
-@keyframes twirl {
-    from { transform: rotate(-8deg) rotateY(0deg); }
-    to   { transform: rotate(-8deg) rotateY(360deg); }
-}
-
-/* Bounce animation */
-@keyframes bounce {
-    0%   { transform: translateY(0) rotate(-8deg); }
-    25%  { transform: translateY(-20px) rotate(-8deg); }
-    50%  { transform: translateY(0) rotate(-8deg); }
-    75%  { transform: translateY(-10px) rotate(-8deg); }
-    100% { transform: translateY(0) rotate(-8deg); }
-}
-
-/* Classes applied on click */
-.twirl {
-    animation: twirl 1s linear forwards;
-}
-
-.bounce {
-    animation: bounce 0.6s ease forwards;
-}
-
-/* Character default */
-.character {
-    width: 280px;              /* desktop */
+    width: 280px;          /* desktop default */
     transform: rotate(-8deg);  /* tilt */
-    position: relative;
-    z-index: 1;
     animation: wave 2.5s ease-in-out infinite;
+    display: block;
 }
 
-/* Text above character */
-.hero-text {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Responsive mobile tweaks */
-@media (max-width: 768px) {
-    .character {
-        width: 300px;          /* bigger on mobile */
-        transform: rotate(-6deg); /* tilt preserved */
-    }
-
-    /* Twirl animation on mobile also keeps tilt */
-    @keyframes twirl {
-        from { transform: rotate(-6deg) rotateY(0deg); }
-        to   { transform: rotate(-6deg) rotateY(360deg); }
-    }
-
-    @keyframes bounce {
-        0%   { transform: translateY(0) rotate(-6deg); }
-        25%  { transform: translateY(-20px) rotate(-6deg); }
-        50%  { transform: translateY(0) rotate(-6deg); }
-        75%  { transform: translateY(-10px) rotate(-6deg); }
-        100% { transform: translateY(0) rotate(-6deg); }
-    }
-}
-
-/* Wave animation */
+/* Wave keyframes */
 @keyframes wave {
     0%   { transform: rotate(-8deg); }
     25%  { transform: rotate(-5deg); }
@@ -139,10 +64,34 @@ body {
     100% { transform: rotate(-8deg); }
 }
 
-/* Mobile adjustments */
+/* Twirl animation (on wrapper) */
+@keyframes twirl {
+    from { transform: rotateY(0deg); }
+    to   { transform: rotateY(360deg); }
+}
+
+/* Bounce animation (on wrapper) */
+@keyframes bounce {
+    0%   { transform: translateY(0); }
+    25%  { transform: translateY(-20px); }
+    50%  { transform: translateY(0); }
+    75%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* Classes applied via JS */
+.twirl {
+    animation: twirl 1s linear forwards;
+}
+
+.bounce {
+    animation: bounce 0.6s ease forwards;
+}
+
+/* Responsive tweaks */
 @media (max-width: 768px) {
     .hero-container {
-        flex-direction: row;  /* stay side-by-side on mobile */
+        flex-direction: row; /* keep side-by-side */
         justify-content: center;
         text-align: center;
     }
@@ -156,7 +105,30 @@ body {
     }
 
     .character {
-        width: 300px;        /* bigger for mobile */
-        transform: rotate(-6deg);
+        width: 300px;          /* bigger on mobile */
+        transform: rotate(-6deg); /* preserve tilt */
+    }
+
+    /* Wave keyframes mobile */
+    @keyframes wave {
+        0%   { transform: rotate(-6deg); }
+        25%  { transform: rotate(-3deg); }
+        50%  { transform: rotate(-6deg); }
+        75%  { transform: rotate(-9deg); }
+        100% { transform: rotate(-6deg); }
+    }
+
+    /* Twirl & bounce keyframes mobile */
+    @keyframes twirl {
+        from { transform: rotateY(0deg); }
+        to   { transform: rotateY(360deg); }
+    }
+
+    @keyframes bounce {
+        0%   { transform: translateY(0); }
+        25%  { transform: translateY(-20px); }
+        50%  { transform: translateY(0); }
+        75%  { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
     }
 }
