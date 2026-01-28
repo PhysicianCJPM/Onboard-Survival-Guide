@@ -8,7 +8,7 @@
 /* Body & background */
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: #f7f7f2; /* off-white */
+    background-color: #f7f7f2;
     color: #1f2937;
 }
 
@@ -25,9 +25,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;              /* image-text spacing */
-    padding: 0 0.5rem;      /* reduce horizontal padding */
-    flex-wrap: wrap;         /* allows text/image to wrap on very small screens */
+    gap: 1rem;
+    padding: 0 0.5rem;
+    flex-wrap: wrap;
 }
 
 /* Text */
@@ -36,7 +36,7 @@ body {
     z-index: 2;
     display: flex;
     flex-direction: column;
-    max-width: 70%;          /* prevent text from overflowing */
+    max-width: 70%;
 }
 
 .hero-text h1 {
@@ -51,16 +51,16 @@ body {
     word-wrap: break-word;
 }
 
-/* Character wrapper (for click animations) */
+/* Character wrapper for click animations */
 .character-wrapper {
     display: inline-block;
-    perspective: 1000px;    /* for 3D twirl */
+    perspective: 1000px;
 }
 
 /* Character image: tilt + wave */
 .character {
-    width: 120px;             /* desktop size */
-    transform: rotate(-8deg); /* tilt */
+    width: 280px;
+    transform: rotate(-8deg);
     animation: wave 2.5s ease-in-out infinite;
     display: block;
 }
@@ -74,13 +74,13 @@ body {
     100% { transform: rotate(-8deg); }
 }
 
-/* Twirl animation around Y-axis (applied to wrapper) */
+/* Twirl animation around Y-axis */
 @keyframes twirl {
     from { transform: rotateY(0deg); }
     to   { transform: rotateY(360deg); }
 }
 
-/* Bounce animation (applied to wrapper) */
+/* Bounce animation */
 @keyframes bounce {
     0%   { transform: translateY(0); }
     25%  { transform: translateY(-20px); }
@@ -91,41 +91,40 @@ body {
 
 /* Classes applied via JS */
 .twirl {
-    animation: twirl 1s linear forwards;
+    animation: twirl 1s linear infinite;
 }
 
 .bounce {
-    animation: bounce 0.6s ease forwards;
+    animation: bounce 0.6s ease infinite;
 }
 
-/* Responsive tweaks for mobile */
+/* Responsive tweaks */
 @media (max-width: 768px) {
     .hero-container {
-        flex-direction: row;  /* side-by-side */
+        flex-direction: row;
         justify-content: center;
         text-align: center;
     }
 
     .hero-text {
-        max-width: 55%;       /* shrink text width on mobile */
+        max-width: 55%;
     }
 
     .hero-text h1 {
-        font-size: 2.2rem;    /* smaller heading */
+        font-size: 2.2rem;
         word-wrap: break-word;
     }
 
     .hero-text p {
-        font-size: 1rem;      /* smaller paragraph */
+        font-size: 1rem;
         word-wrap: break-word;
     }
 
     .character {
-        width: 120px;          /* smaller image for small screens */
-        transform: rotate(-6deg); /* maintain tilt */
+        width: 120px; /* mobile size reduced */
+        transform: rotate(-6deg);
     }
 
-    /* Wave animation adjusted for mobile tilt */
     @keyframes wave {
         0%   { transform: rotate(-6deg); }
         25%  { transform: rotate(-3deg); }
@@ -134,7 +133,6 @@ body {
         100% { transform: rotate(-6deg); }
     }
 
-    /* Twirl & bounce keyframes remain the same */
     @keyframes twirl {
         from { transform: rotateY(0deg); }
         to   { transform: rotateY(360deg); }

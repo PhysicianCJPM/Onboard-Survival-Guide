@@ -2,20 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.querySelector('.character-wrapper');
 
     wrapper.addEventListener('click', () => {
-        // Start twirl animation
-        wrapper.classList.add('twirl');
+        // Add infinite twirl & bounce classes
+        wrapper.classList.add('twirl', 'bounce');
 
-        // When twirl ends, remove it and trigger bounce
-        wrapper.addEventListener('animationend', () => {
-            wrapper.classList.remove('twirl');
-            wrapper.classList.add('bounce');
-
-            // Remove bounce after it ends to allow repeated clicks
-            wrapper.addEventListener('animationend', () => {
-                wrapper.classList.remove('bounce');
-            }, { once: true });
-        }, { once: true });
+        // Remove classes after some time if you want to allow restarting animation later
+        // Optional: comment out if you want truly infinite until page reload
+        setTimeout(() => {
+            wrapper.classList.remove('twirl', 'bounce');
+        }, 5000); // adjust duration if needed
     });
 });
-
-//for rebuild comment
